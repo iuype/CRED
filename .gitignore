@@ -1,4 +1,6 @@
 
 200Hz_rawdata/*
+1000Hz_rawdata_multimodal/*
 prepre.m
 *.asv
+*.mat

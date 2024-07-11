@@ -1,6 +1,6 @@
 clc;
-clear;
-close all;
+% clear;
+% close all;
 
 %% load data
 load ./200Hz_rawdata/dataset.mat;
@@ -109,7 +109,15 @@ axis('off');
 
 %% classification plot
 
-time_avg_X = mean(X, 2);
+% ch_list = 1:62;
+
+
+time_avg_X = mean(X(:, :, [1:62], :), 2);
+
+for si = 1:length(unique(Ysub))
+    index = find(Ysub == si);
+    time_avg_X(index, :) = zscore(time_avg_X(index, :));
+end
 
 for si = 1:length(unique(Ysub))
     trainX = time_avg_X(find(Ysub ~= si), :, :, :);
@@ -129,3 +137,7 @@ for si = 1:length(unique(Ysub))
 end
 
 disp(mean(acc_each_sub))
+disp(std(acc_each_sub))
+
+
+
